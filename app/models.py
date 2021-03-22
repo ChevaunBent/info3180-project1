@@ -1,7 +1,7 @@
 from . import db
 
 class PropertyInfo(db.Model):
-    propid = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50), nullable=False)
     num_bedrooms = db.Column(db.Integer, nullable=False)
     num_bathrooms = db.Column(db.Integer, nullable=False)
@@ -12,8 +12,9 @@ class PropertyInfo(db.Model):
     upload = db.Column(db.String(50), nullable=False)
     date_created = db.Column(db.Date, nullable=False)
 
-    def __init__(self, title, num_bedrooms, num_bathrooms, location, price, 
-    type_, description, upload):
+    def __init__(self, id, title, num_bedrooms, num_bathrooms, location, price, 
+    type_, description, upload, date_created):
+        self.id = id
         self.title = title
         self.num_bedrooms = num_bedrooms
         self.num_bathrooms = num_bathrooms
@@ -22,6 +23,7 @@ class PropertyInfo(db.Model):
         self. type_ = type_
         self.description = description
         self.upload = upload
+        self.date_created = date_created
 
     def is_authenticated(self):
         return True
@@ -34,9 +36,9 @@ class PropertyInfo(db.Model):
 
     def get_id(self):
         try:
-            return unicode(self.propid)
+            return unicode(self.id)
         except NameError:
-            return str(self.propid)
+            return str(self.id)
 
     def __repr__(self):
         return '<User %r>' % (self.title)

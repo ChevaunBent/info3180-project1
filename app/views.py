@@ -10,8 +10,10 @@ from app import app, db
 from flask import render_template, request, redirect, url_for, flash
 from flask import session, abort, send_from_directory, jsonify, make_response
 from werkzeug.utils import secure_filename
-from .forms import UploadForm
-from .models import PropertyInfo
+from app.forms import UploadForm
+from app.models import PropertyInfo
+
+
 
 
 ###
@@ -27,7 +29,7 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="Chevaun Bent")
 
 @app.route('/property', methods=['POST', 'GET'])
 def newproperty():
@@ -51,39 +53,36 @@ def newproperty():
         userfile.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
 
-        # generate PropertyID and date created
+        #Generate PropertyID and date created
         propid = genId(title, filename)
         date_created = datetime.date.today()
-            
-        newproperty = PropertyInfo(propid = propid, title = title, num_bedrooms = num_bedrooms, 
+
+        #Creates a database entry for our database    
+        newproperty = PropertyInfo(id = propid, title = title, num_bedrooms = num_bedrooms, 
         num_bathrooms = num_bathrooms, location = location, price = price, type_ = type_,  
         description = description, upload = filename, date_created = date_created)
-                
+
+        #Add entry to our database and commit to the changes        
         db.session.add(newproperty)
         db.session.commit()
 
-        flash('Property Uploaded', 'success')
+        #Flashes a message to our user and redirects our page
+        flash('Property Uploaded Successfully', 'success')
         return redirect(url_for('properties'))
 
+    #Flashes Error messages to the user
     flash_errors(userform)
     """Render the website's newproperty page."""
     return render_template('newproperty.html', form = userform)
 
-
-def get_upload_images():
-    rootdir = os.getcwd()
-    FileList = []
-    for subdir, dirs, files in os.walk(rootdir + '/uploads'):
-        for f in files:
-            FileList.append(f)       
-    return FileList
-
+#Used to generate a file's url for display
 @app.route("/uploads/<filename>")
 def get_image(filename):
     rootdir = os.getcwd()
     return send_from_directory(rootdir + "/" + app.config['UPLOAD_FOLDER'],
 filename)
 
+#Generates a unique 5 digit property ID for each entry in our database
 def genId(title, filename):
     id = []
     for x in title:
@@ -91,39 +90,46 @@ def genId(title, filename):
     for x in filename:
         id.append(str(ord(x)))
     random.shuffle(id)
-    return id[:5]
+    res= ''.join(id)
+    return int(res[:5])
 
+#Route for displaying all properties
 @app.route('/properties/', methods=["GET", "POST"])
 def properties():
+    #Queries the database for all properties
     properties = PropertyInfo.query.all()
-    prop_list = [{"Property": prop.title, "PropertyID": prop.propid} for prop in properties]
-    
+    #Handles our GET request
     if request.method == "GET":
         """Render the website's properties page."""
         return render_template('properties.html', properties = properties)
-    
+    #Handles our POST request despite there should not be a post request for this route
     elif request.method == "POST":
-        response = make_response(jsonify({"Property": prop_list}))                                           
+        response = make_response(jsonify(properties))                                           
         response.headers['Content-Type'] = 'application/json'            
         return response
-    
+
+
+#Route for finding and displaying a specific property that was selected
 @app.route('/property/<propid>', methods=["GET", "POST"])
 def get_property(propid):
+    #Get a specific property in the database using the property ID that was generated on insertion
+    prop = PropertyInfo.query.filter_by(id=propid).first()
     
-    prop = PropertyInfo.query.filter_by(propid=propid).first()
-    
+    #Handles our Get request to fetch a property that mathces the property ID
     if request.method == "GET":
         return render_template("viewproperty.html", prop=prop)
     
+    #Handles a POST request for in the event a POST request is generated despite this should not happen
     elif request.method == "POST":
+    #Creates an object representation of our POST request
         if prop is not None:
-            response = make_response(jsonify(propid = prop.propid, title = prop.title, num_bedrooms = prop.num_bedrooms, 
+            response = make_response(jsonify(id = prop.propid, title = prop.title, num_bedrooms = prop.num_bedrooms, 
             num_bathrooms = prop.num_bathrooms, location = prop.location, price = prop.price, type_ = prop.type_,  
             description = prop.description, upload = prop.filename, date_created = prop.date_created))
             response.headers['Content-Type'] = 'application/json'            
             return response
         else:
-            flash('No User Found', 'danger')
+            flash('Property Not Found', 'danger')
             return redirect(url_for("home"))
 
 

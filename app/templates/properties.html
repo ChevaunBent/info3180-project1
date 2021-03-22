@@ -3,21 +3,30 @@
 {% block title %} View All Properties {% endblock %}
 
 {% block main %}
-
-{% for prop in properties %}
-    <div class="property">
-        <img src="{{ url_for('static', filename='uploads/'+ prop.upload) }}"></img>
-        
-        <div class="info">
-            <span class="title">{{ prop.title}}</span> <br/>
-            <span class="cdate"><b>Property Added On: </b>{{ prop.date_created }}</span> <br/><br/>
-            
-            <b>Price:</b> {{prop.price }} <br/>
-            {{ prop.description }}
+{% include 'flash_messages.html' %}
+{% if properties|length > 0 %}
+    <div class="propertyimage">
+        {% for prop in properties %}
+        <div>
+            <a href="{{ url_for('get_property', propid = prop.id) }}">
+                <img src="{{ url_for('get_image', filename = prop.upload) }}"/>
+            </a>
+            <div class="info">
+                <span class="title">{{ prop.title}}</span> <br/>
+                <span class="cdate"><b>Property Added On: </b>{{ prop.date_created }}</span> <br/>
+                <b>Price:</b> {{prop.price }} <br/>
+                <b>Description:</b>{{ prop.description }}
+            </div>
         </div>
+        {% endfor %}
+        <br/>
     </div>
-    
-    <br/>
-{% endfor %}
+{% else %}
+    <div class ="propertyimagemessage">
+        <p>No Properties Uploaded yet. Upload a Property to start viewing</p>
+
+    </div>
+
+{% endif %}
 
 {% endblock %}
