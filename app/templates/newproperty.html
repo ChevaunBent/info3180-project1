@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %} Add Property {% endblock %}
+
+{% block main %}
+<form action="{{ url_for('profile') }}" method="POST" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+        
+    {{ form.title.label }} <br/> {{ form.title }} <br />
+    {{ form.description.label }} <br/> {{ form.description }} <br />
+    {{ form.num_bedrooms.label }} <br/> {{ form.num_bedrooms }} <br />
+    {{ form.num_bathrooms.label }} <br/> {{ form.num_bathrooms }} <br />
+    {{ form.price.label }} <br/> {{ form.price }} <br />
+    {{ form.type_.label }} <br/> {{ form.type_ }} <br />
+    {{ form.location.label }} <br/> {{ form.location }} <br />
+    <label for="upload">Image </label><br/>
+    <input type="file" name="image"/>
+    <br /><br/>
+
+    <button type="submit" name="submit">Add Property</button>
+</form>
+{% endblock %}

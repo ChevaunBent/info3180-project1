@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %} View All Properties {% endblock %}
+
+{% block main %}
+
+{% for prop in properties %}
+    <div class="property">
+        <img src="{{ url_for('static', filename='uploads/'+ prop.upload) }}"></img>
+        
+        <div class="info">
+            <span class="title">{{ prop.title}}</span> <br/>
+            <span class="cdate"><b>Property Added On: </b>{{ prop.date_created }}</span> <br/><br/>
+            
+            <b>Price:</b> {{prop.price }} <br/>
+            {{ prop.description }}
+        </div>
+    </div>
+    
+    <br/>
+{% endfor %}
+
+{% endblock %}
