@@ -3,19 +3,26 @@
 {% block title %} View All Properties {% endblock %}
 
 {% block main %}
-{% include 'flash_messages.html' %}
+<h1>Properties</h1>
 {% if properties|length > 0 %}
     <div class="propertyimage">
         {% for prop in properties %}
-        <div>
-            <a href="{{ url_for('get_property', propid = prop.id) }}">
+        <div class="group">
+            <div class = "img">
                 <img src="{{ url_for('get_image', filename = prop.upload) }}"/>
-            </a>
+            </div>
+
             <div class="info">
-                <span class="title">{{ prop.title}}</span> <br/>
-                <span class="cdate"><b>Property Added On: </b>{{ prop.date_created }}</span> <br/>
-                <b>Price:</b> {{prop.price }} <br/>
-                <b>Description:</b>{{ prop.description }}
+                <span class="title">{{ prop.title}}</span>
+                <span class="cdate"><b>Property Added On: </b>{{ prop.date_created }}</span>
+                <span class="loc"><i class="glyphicon glyphicon-map-marker"></i> {{prop.location}}</span>
+                <div class="price">
+                    <span> ${{ prop.price}}</span> <br/>
+                </div>
+                <br/>
+                <a href="{{ url_for('get_property', propid = prop.id) }}">
+                    <span class="view">View Property</span>
+                </a>
             </div>
         </div>
         {% endfor %}
@@ -23,7 +30,7 @@
     </div>
 {% else %}
     <div class ="propertyimagemessage">
-        <p>No Properties Uploaded yet. Upload a Property to start viewing</p>
+        <h4>No Properties Uploaded yet. Upload a Property to start viewing</h4>
 
     </div>
 

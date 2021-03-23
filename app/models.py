@@ -12,16 +12,16 @@ class PropertyInfo(db.Model):
     upload = db.Column(db.String(50), nullable=False)
     date_created = db.Column(db.Date, nullable=False)
 
-    def __init__(self, id, title, num_bedrooms, num_bathrooms, location, price, 
-    type_, description, upload, date_created):
+    def __init__(self, id, title, description, num_bedrooms, num_bathrooms, price, 
+    type_, location, upload, date_created):
         self.id = id
         self.title = title
+        self.description = description
         self.num_bedrooms = num_bedrooms
         self.num_bathrooms = num_bathrooms
-        self.location = location
         self.price = price
         self. type_ = type_
-        self.description = description
+        self.location = location
         self.upload = upload
         self.date_created = date_created
 

@@ -3,24 +3,51 @@
 {% block title %} Add Property {% endblock %}
 
 {% block main %}
+<div class = "head">
+    <h1>Add New Property</h1>
+</div>
 <form action="{{ url_for('newproperty') }}" method="POST" enctype="multipart/form-data">
     {{ form.csrf_token }}
-        
-    {{ form.title.label }} <br/> {{ form.title }} <br />
-    {{ form.description.label }} <br/> {{ form.description }} <br />
-    {{ form.num_bedrooms.label }} <br/> {{ form.num_bedrooms }} <br />
-    {{ form.num_bathrooms.label }} <br/> {{ form.num_bathrooms }} <br />
-    {{ form.price.label }} <br/> {{ form.price }} <br />
-    {{ form.type_.label }} <br/> {{ form.type_ }} <br />
-    {{ form.location.label }} <br/> {{ form.location }} <br />
-    <div class="form-group">
-        {{ form.upload.label }}<br/>
-        {{ form.upload(class="form-control") }}
+    <div class = "grid-container">
+        <div class = "a">
+            {{ form.title.label }} <br/> 
+            {{ form.title }} <br/>
+        </div>    
+        <div class = "b">
+            {{ form.description.label }} <br/> 
+            {{ form.description }} <br/>       
+        </div>
+        <div class = "c">
+            {{ form.num_bedrooms.label }} <br/> 
+            {{ form.num_bedrooms }} <br/>
+        </div>
+        <div class = "d">
+            {{ form.num_bathrooms.label }} <br/> 
+            {{ form.num_bathrooms }} <br/>
+        </div>
+        <div class = "e">
+            {{ form.price.label }} <br/> 
+            {{ form.price }} <br/>
+        </div>
+        <div class = "f">
+            {{ form.type_.label }} <br/> 
+            {{ form.type_ }} <br/>
+        </div>
+        <div class = "g">
+            {{ form.location.label }} <br/> 
+            {{ form.location }} <br/>
+        </div>
+        <div class = "h">
+            {{ form.upload.label }} <br/>
+            {{ form.upload(class="form-control") }} <br/>
+        </div>
+        <br/>
+        <div class = "i">
+            <button class= "but" type="submit" name="submit">Add Property</button><br/>
+        </div>
+            
     </div>
-    {% include 'flash_messages.html' %}
-    <br/>
-
-    <button type="submit" name="submit">Add Property</button>
+    
 </form>
 
 

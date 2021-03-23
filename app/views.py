@@ -40,12 +40,12 @@ def newproperty():
 
         # get form data
         title = userform.title.data
+        description = userform.description.data
         num_bedrooms = userform.num_bedrooms.data
         num_bathrooms = userform.num_bathrooms.data
-        location = userform.location.data
         price = userform.price.data
         type_ = userform.type_.data
-        description = userform.description.data
+        location = userform.location.data
 
         # Get Photo of property and save to your uploads folder
         userfile = request.files['upload']
@@ -58,9 +58,9 @@ def newproperty():
         date_created = datetime.date.today()
 
         #Creates a database entry for our database    
-        newproperty = PropertyInfo(id = propid, title = title, num_bedrooms = num_bedrooms, 
-        num_bathrooms = num_bathrooms, location = location, price = price, type_ = type_,  
-        description = description, upload = filename, date_created = date_created)
+        newproperty = PropertyInfo(id = propid, title = title, description = description, num_bedrooms = num_bedrooms, 
+        num_bathrooms = num_bathrooms, price = price, type_ = type_, location = location, upload = filename,  
+        date_created = date_created)
 
         #Add entry to our database and commit to the changes        
         db.session.add(newproperty)

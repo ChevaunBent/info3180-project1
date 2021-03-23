@@ -1,18 +1,133 @@
 body {
     padding-top: 50px;
+    background-color: rgb(242, 242, 242);
 }
 
-/*All Properties*/
+.required{
+    color: rgb(255, 0, 0);
+    font-size: 15px;
+}
+
+.submitted{
+    background-color: rgb(39, 255, 190);
+    color: white;
+    border-radius: 10px;
+}
+
+.flashes{
+    display: grid;
+    padding-top: 20px;
+    color:rgb(4, 255, 0);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 25px;
+}
+
+.container{
+    padding: 10px;
+}
+
+form{
+    font-size: 16px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/*New Property Form for newproperty.html*/
+.head {
+    padding-top: 20px;
+    width: 75%;
+    margin: auto;
+    text-align: center;
+}
+.grid-container {
+    width: 70%;
+    padding: 50px;
+    background-color: white;
+    display: grid;
+    margin: auto;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: minmax(70px, auto);
+    grid-template-areas: "a a a a a"
+                         "b b b b b"
+                         "b b b b b"
+                         "c c . d d"
+                         "e e . f f"
+                         "g g . . ."
+                         "h h h . ."
+                         "i i i i i";
+  }
+
+.a{
+    grid-area: a;
+}
+
+.b{
+    grid-area: b;
+}
+
+.c{
+    grid-area: c;
+}
+
+.d{
+    grid-area: d;
+}
+
+.e{
+    grid-area: e;
+}
+
+.f{
+    grid-area: f;
+}
+
+.g{
+    grid-area: g;
+}
+
+.h{
+    grid-area: h;
+}
+
+.i{
+    grid-area: i;
+    margin: auto;
+}
+
+.grid-container input{
+    width: 100%;
+}
+
+.b input{
+    height: 75%;
+}
+
+.but{
+    width: 100%;
+    padding: 5px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+}
+
+/*All Properties for properties.html*/
 .propertyimage{
     display: grid;
-    grid-template-columns: 25% 25%;
-    padding-top:5%;
+    grid-template-columns: 33% 33% 33%;
+}
+
+.group{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
 }
 
 .propertyimage img {
-    width: 200px; 
-    height: 200px;
-    object-fit: cover;
+    width: 100%; 
+    height: 100%;
+}
+
+.propertyimage div {
+    padding: 5px;
 }
 
 .propertyimagemessage{
@@ -20,22 +135,127 @@ body {
     color: red;
 }
 
-/*Individual Properties*/
+.info{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    font-size: 16px;
+    align-items: center;
+    max-height: 80%;
+
+}
+
+.title{
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+
+.cdate{
+    display: block;
+    text-align: center;
+}
+
+.loc{
+    display: block;
+    text-align: center;
+}
+
+.price{
+    overflow:hidden;
+    max-width: 100%;
+    text-align: center;
+}
+
+.price span{
+    padding: 5px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 15%/50%;
+    font-size: 80%;
+}
+
+.view{
+    padding: 10px;
+    display: block;
+    text-align: center;
+    background-color: rgb(0, 168, 126);
+    color: white;
+    
+}
+
+/*Individual Property for viewproperty.html*/
 
 .singlepropertyimage{
+    padding-top: 3%;
     display: grid;
-    justify-content: center;
+    grid-template-columns: 1fr 1fr;
+    max-width: 100%; 
+    max-height: 100%;
+    
 }
 
 .singlepropertyimage img {
-    padding-top: 5%;
-    width: 500px; 
-    height: 500px;
-    object-fit: cover;
+    max-width: 100%; 
+    max-height: 100%;
+    object-fit: fill;
 }
 
 .singleinfo{
-    padding-top: 10%;
+    background-color: white;
+    padding: 0% 10% 0% 10%;
+    max-width: 100%; 
+    max-height: 100%;
+    font-size: 16px;
+}
+
+
+
+.singlegroup{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding:10px 0 10px 0;
+}
+
+.singledesc{
+    padding:10px 0 10px 0;
     margin:auto;
 }
 
+.singleprice {
+    width: 50%;
+    padding: 5px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 15%/50%;
+    font-size: 80%;
+    text-align: center;
+}
+
+.singletype {
+    width: 50%;
+    padding: 5px;
+    background-color: #ffa600;
+    color: white;
+    border-radius: 15%/50%;
+    font-size: 80%;
+    text-align: center;
+}
+
+.singlegroup2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding:10px 0 10px 0;
+}
+
+.emdiv{
+    padding-top: 10px;
+}
+
+.embut{
+    width: 30%;
+    padding: 5px;
+    background-color: #0a792f;
+    color: white;
+    font-size: 80%;
+    text-align: center;
+}
