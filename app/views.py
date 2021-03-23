@@ -13,7 +13,7 @@ from werkzeug.utils import secure_filename
 from app.forms import UploadForm
 from app.models import PropertyInfo
 
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+conn = psycopg2.connect(app.config['SQLALCHEMY_DATABASE_URI'])
 
 
 ###
