@@ -5,7 +5,7 @@ Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
 
-import os, random, datetime
+import os, random, datetime, psycopg2
 from app import app, db
 from flask import render_template, request, redirect, url_for, flash
 from flask import session, abort, send_from_directory, jsonify, make_response
@@ -13,7 +13,7 @@ from werkzeug.utils import secure_filename
 from app.forms import UploadForm
 from app.models import PropertyInfo
 
-
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 
 ###
